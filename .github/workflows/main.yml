@@ -8,7 +8,7 @@ on:
       - '**/*'
 
 env:
-  IMAGE_REPO: priyanshu777/demo
+  IMAGE_REPO: priyanshu777/project-2
   AWS_REGION: us-east-1
   CLUSTER_NAME: priyanshu-eks-cluster
 
