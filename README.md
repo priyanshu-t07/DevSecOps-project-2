@@ -1,12 +1,63 @@
-# React + Vite
+🚀 Task-2: DevSecOps & GitOps Delivery on Kubernetes (EKS)
+📌 Overview
+This project enhances the CI/CD pipeline by adding:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Security Scans → tfsec (IaC), Trivy (containers)
 
-Currently, two official plugins are available:
+Secret Management → Kubernetes Sealed Secrets
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+GitOps → Continuous deployment using Argo CD
 
-## Expanding the ESLint configuration
+EKS → Scalable Kubernetes cluster
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+GitHub Actions → Automated CI/CD
+
+✅ Goal: Build a secure, automated, and scalable Kubernetes deployment pipeline.
+
+📂 Repository Structure
+task2/
+├── .github/
+│   └── workflows/
+│       └── main.yml
+├── k8s/
+│   ├── deployment.yaml
+│   ├── svc.yaml
+│   └── ingress.yaml
+├── sealed-secrets/
+│   └── mysealedsecret.yaml
+├── argocd/
+│   └── argocd-install.yaml
+└── frontend/
+    ├── Dockerfile
+    ├── nginx.conf
+    └── src/
+
+    ✅ Quick Run Steps (FOR MORE DETAILED STEPS FOLLOW MY PPT)
+git clone https://github.com/priyanshu-t07/DevSecOps-project-2.git task2 && cd task2
+docker build -t my-frontend:latest frontend/
+aws ecr create-repository --repository-name my-frontend
+docker tag my-frontend:latest <ECR_URI>:latest && docker push <ECR_URI>:latest
+eksctl create cluster --name devops-pipeline
+kubectl apply -f argocd/argocd-install.yaml
+kubectl apply -f sealed-secrets/mysealedsecret.yaml
+kubectl apply -f k8s/
+kubectl get ingress   # Copy DNS → open in browser
+
+🔑 Key Features
+✔ tfsec → Terraform security scanning
+✔ Trivy → Container image vulnerability scanning
+✔ Sealed Secrets → Secure Kubernetes secrets
+✔ GitHub Actions → CI/CD automation
+✔ Argo CD → GitOps continuous delivery
+
+
+🔧 Prerequisites
+Tool	Required
+AWS CLI	Configured
+kubectl	Latest
+eksctl	Latest
+Docker	Installed
+Helm	Installed
+Node.js	Installed
+
+
